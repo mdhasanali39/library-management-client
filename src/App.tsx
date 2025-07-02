@@ -7,12 +7,14 @@ function App() {
   return (
     <>
       <div>
-        <Navbar/>
-        <Outlet/>
-        <Footer/>
+        <Navbar />
+        <div>
+          <Outlet />
+        </div>
+        <Footer />
       </div>
     </>
-  )
+  );
 }
 
 export default App

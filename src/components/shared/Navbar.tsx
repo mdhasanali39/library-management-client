@@ -1,18 +1,33 @@
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import { MdLocalLibrary } from "react-icons/md";
 
 const Navbar = () => {
   return (
-    <nav className="max-w-7xl mx-auto flex items-center justify-between bg-gray-100 p-4">
+    <nav className="max-w-7xl mx-auto flex items-center justify-between bg-green-100 p-4">
       {/* logo */}
-      <div className="flex items-center gap-1">
+      <Link to="/" className="flex items-center gap-1">
         <span className="text-green-500">
           <MdLocalLibrary size={24} />
         </span>
         <h1 className="font-medium text-lg">Library Management</h1>
-      </div>
+      </Link>
       {/* links */}
       <ul className="mr-8 flex justify-between items-center gap-8">
+        <li>
+          <NavLink to="/">
+            {({ isActive }) => (
+              <span
+                className={
+                  isActive
+                    ? "text-green-500 font-medium hover:text-green-500 transition-all duration-200"
+                    : "font-medium hover:text-green-500 transition-all duration-200"
+                }
+              >
+                Home
+              </span>
+            )}
+          </NavLink>
+        </li>
         <li>
           <NavLink to="/books">
             {({ isActive }) => (
