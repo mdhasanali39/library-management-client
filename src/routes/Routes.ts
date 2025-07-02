@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router";
 import App from "../App";
 import Books from "../pages/books/Books";
 import AddBook from "../pages/addBook/AddBook";
+import BorrowedBooksSummary from "../pages/borrowedBooksSummary/BorrowedBooksSummary";
 
 const router = createBrowserRouter([
   {
@@ -17,8 +18,8 @@ const router = createBrowserRouter([
         Component: AddBook,
       },
       {
-        path: "books/:id",
-        Component: Books,
+        path: "borrow-summary",
+        Component: BorrowedBooksSummary,
       },
     ],
   },
