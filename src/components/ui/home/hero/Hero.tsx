@@ -9,7 +9,9 @@ const Hero = () => {
             <span className="text-green-500">That is your real friend</span>
           </h2>
           <p className="text-4xl font-bold leading-relaxed mb-10">
-            No cheating, make you happy and cry, But That is your real friend
+            No cheating, make you{" "}
+            <span className="text-green-500">happy and cry</span> <br /> But,
+            That is your <span className="text-green-500">real friend</span>
           </p>
 
           <Link
