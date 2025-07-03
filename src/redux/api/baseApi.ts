@@ -8,8 +8,11 @@ export const baseApi = createApi({
   endpoints: (builder) => ({
     getBooks: builder.query({
         query: ()=> "/books"
+    }),
+    getBook: builder.query({
+        query: (id: string) => `/books/${id}`
     })
   })
 });
 
-export const {useGetBooksQuery} = baseApi
+export const {useGetBooksQuery, useGetBookQuery} = baseApi
