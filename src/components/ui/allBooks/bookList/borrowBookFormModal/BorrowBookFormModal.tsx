@@ -1,5 +1,6 @@
 import { FaTimesCircle } from "react-icons/fa";
 import { useSaveBorrowMutation } from "../../../../../redux/api/baseApi";
+import toast from "react-hot-toast";
 
 const BorrowBookFormModal = ({ book, setBookToBorrow }) => {
   const [saveBorrow, { data, isLoading, isError }] =
@@ -11,11 +12,13 @@ const BorrowBookFormModal = ({ book, setBookToBorrow }) => {
     const quantity = e.target.enterCopies.value;
 
     if(quantity > book?.copies){
-      return alert("Can't exceeds the available copies")
+      toast.error(`Can't exceeds the available copies ${book?.copies}`);
+      return
     }
 
     if (!quantity || quantity <= 0){
-      return alert("please enter valid quantity of copies")
+      toast.error("please enter valid quantity of copies");
+      return
     }
     
       
@@ -48,12 +51,11 @@ const BorrowBookFormModal = ({ book, setBookToBorrow }) => {
         <form onSubmit={handleBorrowBook}>
           <div>
             <label htmlFor="enterCopies">Enter number of copies:</label>
-            <input type="number" id="enterCopies" name="enterCopies" className="border-b border-b-black/30 outline-none" />
+            <input type="number" id="enterCopies" name="enterCopies" className="border-b border-b-black/30 outline-none pl-3" />
           </div>
 
           <button
             type="submit"
-            onClick={() => setBookToBorrow(null)}
             className=" bg-green-500 cursor-pointer font-medium text-white px-4 py-2  rounded mt-4"
           >
             Borrow Now

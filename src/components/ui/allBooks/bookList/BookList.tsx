@@ -1,19 +1,54 @@
 import { useState } from "react";
 import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
-import { Link } from "react-router";
 import EditBookFormModal from "./editBookFormModal/EditBookFormModal";
 import BorrowBookFormModal from "./borrowBookFormModal/BorrowBookFormModal";
+import { useDeleteBookMutation } from "../../../../redux/api/baseApi";
+import toast from "react-hot-toast";
 
 const BookList = ({ books }) => {
-
   const [bookToEdit, setBookToEdit] = useState(null);
   const [bookToBorrow, setBookToBorrow] = useState(null);
 
 
+  const [deleteBook, {data, isLoading, error}] = useDeleteBookMutation(undefined);
+
+  console.log(data, "book deleted");
 
   const handleEditBook = (book) => {
     setBookToEdit(book);
   };
+
+  const hanldeDeleteBook = (id) =>{
+
+    toast(
+      (t) => (
+        <div className="p-2">
+          <p className="text-sm mb-2">Are you sure you want to delete?</p>
+          <div className="flex gap-2 justify-end">
+            <button
+              onClick={() => {
+                toast.dismiss(t.id); // close toast
+                deleteBook(id);
+                toast.success("Deleted successfully");
+              }}
+              className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
+            >
+              Yes
+            </button>
+            <button
+              onClick={() => toast.dismiss(t.id)}
+              className="bg-gray-300 hover:bg-gray-400 px-3 py-1 rounded"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      ),
+      {
+        duration: 5000, // auto-close if not interacted
+      }
+    );    
+  }
 
   return (
     <div className="overflow-x-auto max-w-7xl mx-auto my-16 min-h-[calc(100vh-60px)]">
@@ -38,7 +73,7 @@ const BookList = ({ books }) => {
               <td className="text-center">{book.isbn}</td>
               <td className="text-center">{book.copies}</td>
               <td className="text-center">
-                {book.available ? "Available" : "Not Available"}
+                {book.available ? "Available" : "Unavailable"}
               </td>
               <td className="text-center">
                 <div className="flex justify-center items-center gap-6">
@@ -50,17 +85,18 @@ const BookList = ({ books }) => {
                       <FaPencilAlt />
                     </span>
                   </button>
-                  <Link
-                    to={`/books/${book?._id}`}
+                  <button
+                  onClick={()=>hanldeDeleteBook(book?._id)}
                     className=" cursor-pointer font-medium text-lg text-red-500  rounded mt-4"
                   >
                     <span>
                       <FaTrashAlt />
                     </span>
-                  </Link>
+                  </button>
                   <button
+                    disabled={!book.available}
                     onClick={() => setBookToBorrow(book)}
-                    className=" cursor-pointer font-medium text-lg text-green-500  rounded mt-4"
+                    className=" cursor-pointer font-medium text-lg text-green-500 disabled:cursor-not-allowed rounded mt-4"
                   >
                     <span>Borrow</span>
                   </button>
@@ -73,7 +109,12 @@ const BookList = ({ books }) => {
       {bookToEdit && (
         <EditBookFormModal book={bookToEdit} setBookToEdit={setBookToEdit} />
       )}
-      {bookToBorrow && <BorrowBookFormModal book={bookToBorrow} setBookToBorrow={setBookToBorrow} />}
+      {bookToBorrow && (
+        <BorrowBookFormModal
+          book={bookToBorrow}
+          setBookToBorrow={setBookToBorrow}
+        />
+      )}
     </div>
   );
 };
