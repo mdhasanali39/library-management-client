@@ -1,8 +1,13 @@
+import BookList from "../../components/ui/allBooks/bookList/BookList";
+import { useGetBooksQuery } from "../../redux/api/baseApi";
 
 const Books = () => {
+    
+    const {data: books, isError, isLoading} = useGetBooksQuery(undefined);
+
     return (
         <div>
-            books page
+            <BookList books={books?.data} />
         </div>
     );
 };
