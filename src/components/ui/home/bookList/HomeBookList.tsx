@@ -51,6 +51,7 @@ _id
 : 
 "68560af2e9e545119b095107"
   */
+ 
 
   return (
     <div className="max-w-7xl mx-auto my-20">
