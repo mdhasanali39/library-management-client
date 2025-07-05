@@ -4,16 +4,16 @@ import { Link, NavLink } from "react-router";
 const Footer = () => {
   return (
     <div className="max-w-7xl mx-auto bg-green-100 p-10 pb-0">
-      <div className="flex justify-between">
+      <div className="flex justify-between  flex-col md:flex-row">
         {/* logo */}
-        <Link to="/" className="flex items-center gap-1">
+        <Link to="/" className="flex items-center gap-1 max-md:mb-6">
           <span className="text-green-500">
             <MdLocalLibrary size={24} />
           </span>
           <h1 className="font-medium text-lg">Library Management</h1>
         </Link>
         {/* links */}
-        <ul className="mr-8 flex justify-between items-center gap-8">
+        <ul className="mr-8 flex justify-between flex-col md:flex-row gap-4 md:gap-8">
           <li>
             <NavLink to="/books">
               {({ isActive }) => (
@@ -61,10 +61,9 @@ const Footer = () => {
           </li>
         </ul>
       </div>
-      <p className="text-center mt-8">
+      <p className="text-left md:text-center mt-8 pb-8">
         Footer &copy; {new Date().getFullYear()} Library Management System
       </p>
-      <br />
     </div>
   );
 };
