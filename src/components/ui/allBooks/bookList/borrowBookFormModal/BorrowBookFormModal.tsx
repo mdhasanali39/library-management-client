@@ -34,24 +34,35 @@ const BorrowBookFormModal = ({ book, setBookToBorrow }) => {
   return (
     <div className="fixed inset-0 bg-black/5 flex justify-center items-center">
       <div className="relative bg-white max-w-3xl mx-auto rounded-lg p-8 drop-shadow-lg">
-        Name: {book?.title}
-        <br />
-        Author: {book?.author}
-        <br />
-        Genre: {book?.genre}
-        <br />
-        ISBN: {book?.isbn}
-        <br />
-        Copies: {book?.copies}
-        <br />
-        Available: {book?.available}
-        <br />
-        Description: {book?.description}
-        <br />
+        <div>
+          <p className="text-2xl font-bold">Overview</p>
+          Name: {book?.title}
+          <br />
+          Author: {book?.author}
+          <br />
+          Genre: {book?.genre}
+          <br />
+          ISBN: {book?.isbn}
+          <br />
+          Copies: {book?.copies}
+          <br />
+          Available: {book?.available}
+          <br />
+          Description: {book?.description}
+          <br />
+        </div>
+
         <form onSubmit={handleBorrowBook}>
-          <div>
+          <div className="border border-green-500 rounded p-4 mt-4">
             <label htmlFor="enterCopies">Enter number of copies:</label>
-            <input type="number" id="enterCopies" name="enterCopies" className="border-b border-b-black/30 outline-none pl-3" />
+            <input
+              type="number"
+              max={book?.copies}
+              min={1}
+              id="enterCopies"
+              name="enterCopies"
+              className="border-b border-b-black/30 outline-none pl-3"
+            />
           </div>
 
           <button
@@ -62,7 +73,10 @@ const BorrowBookFormModal = ({ book, setBookToBorrow }) => {
           </button>
         </form>
         {/* close button  */}
-        <button onClick={() => setBookToBorrow(null)} className="absolute top-3 right-3 cursor-pointer text-red-500">
+        <button
+          onClick={() => setBookToBorrow(null)}
+          className="absolute top-3 right-3 cursor-pointer text-red-500"
+        >
           <FaTimesCircle size={24} />
         </button>
       </div>

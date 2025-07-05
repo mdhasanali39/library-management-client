@@ -1,8 +1,11 @@
-import { Link, useParams } from "react-router";
+import { useParams } from "react-router";
 import { useGetBookQuery } from "../../redux/api/baseApi";
+import BorrowBookFormModal from "../../components/ui/allBooks/bookList/borrowBookFormModal/BorrowBookFormModal";
+import { useState } from "react";
 
 const SingleBookDetails = () => {
   const { id } = useParams();
+  const [bookToBorrow, setBookToBorrow] = useState(null);
   const { data: book, isLoading, isError } = useGetBookQuery(id as string);
 
   console.log(id, "params");
@@ -12,20 +15,17 @@ const SingleBookDetails = () => {
       <div className="flex items-center justify-center gap-5 mt-10">
         <div className="relative bg-green-100 self-center p-4 h-[350px] rounded-lg shadow cursor-pointer">
           <div className="relative top-1/2 -translate-y-1/2">
-          <p className="font-bold mask-radial-from-neutral-700 text-4xl text-center">
-            {book?.data?.title}
-          </p>
-          <p className="font-medium text-center mt-4">
-            by {book?.data?.author}
-          </p>
+            <p className="font-bold mask-radial-from-neutral-700 text-4xl text-center">
+              {book?.data?.title}
+            </p>
+            <p className="font-medium text-center mt-4">
+              by {book?.data?.author}
+            </p>
           </div>
-          
         </div>
         {/* details with actions  */}
         <div className="!self-top">
-          <p className="font-bold  text-left text-xl">
-            {book?.data?.title}
-          </p>
+          <p className="font-bold  text-left text-xl">{book?.data?.title}</p>
           <p className="font-medium text-left mt-3 italic ml-4 text-sm">
             - by {book?.data?.author}
           </p>
@@ -64,12 +64,13 @@ const SingleBookDetails = () => {
           </div>
           {/* borrow book button  */}
           <div className="mt-10">
-            <Link
-              to={`/books/${book?.data?._id}`}
-              className=" bg-green-500 cursor-pointer font-medium text-lg text-white px-4 py-2 rounded"
+            <button
+              disabled={!book?.available}
+              onClick={() => setBookToBorrow(book)}
+              className=" cursor-pointer font-medium text-lg text-green-500 disabled:cursor-not-allowed rounded mt-4"
             >
-              Borrow Book
-            </Link>
+              <span>Borrow</span>
+            </button>
           </div>
         </div>
       </div>
@@ -79,6 +80,12 @@ const SingleBookDetails = () => {
           <p>{book?.data?.description}</p>
         </div>
       </div>
+      {bookToBorrow && (
+              <BorrowBookFormModal
+                book={bookToBorrow}
+                setBookToBorrow={setBookToBorrow}
+              />
+            )}
     </div>
   );
 };

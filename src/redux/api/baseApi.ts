@@ -5,7 +5,7 @@ export const baseApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://library-management-server-navy.vercel.app/api",
   }),
-  tagTypes: ["books", "Put"],
+  tagTypes: ["books"],
   endpoints: (builder) => ({
     getBooks: builder.query({
       query: () => "/books",
@@ -19,20 +19,22 @@ export const baseApi = createApi({
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: ["Put"],
+      invalidatesTags: ["books"],
     }),
     saveBook: builder.mutation({
       query: (data) => ({
         url: "/books",
         method: "POST",
         body: data,
-      })
+      }),
+      invalidatesTags: ["books"],
     }),
     deleteBook: builder.mutation({
       query: (id) => ({
         url: `/books/${id}`,
         method: "DELETE",
-      })
+      }),
+      invalidatesTags: ["books"],
     }),
     saveBorrow: builder.mutation({
       query: (data) => ({
@@ -42,7 +44,10 @@ export const baseApi = createApi({
       }),
       invalidatesTags: ["books"],
     }),
+    getBorrowSummary: builder.query({
+      query: () => "/borrow",
+    }),
   }),
 });
 
-export const {useGetBooksQuery, useGetBookQuery, useUpdateBookMutation, useSaveBookMutation, useDeleteBookMutation, useSaveBorrowMutation} = baseApi
+export const {useGetBooksQuery, useGetBookQuery, useUpdateBookMutation, useSaveBookMutation, useDeleteBookMutation, useGetBorrowSummaryQuery, useSaveBorrowMutation} = baseApi

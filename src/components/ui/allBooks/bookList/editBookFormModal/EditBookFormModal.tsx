@@ -1,31 +1,41 @@
 import { GiNextButton } from "react-icons/gi";
 import { useUpdateBookMutation } from "../../../../../redux/api/baseApi";
+import toast from "react-hot-toast";
 
 const EditBookFormModal = ({ book, setBookToEdit }) => {
-  
-    const [updateBook, {data, isLoading, isError}] = useUpdateBookMutation(undefined)
+  const [updateBook, { data, isLoading, isError }] =
+    useUpdateBookMutation(undefined);
 
-    console.log(data,"book updated")
-    const handleSubmitForm = async(e) =>{
-        try {
-            e.preventDefault();
+  const handleSubmitForm = async (e) => {
+    try {
+      e.preventDefault();
 
-            const data = new FormData(e.target);
-            const bookData = Object.fromEntries(data);
-            console.log(bookData);
+      const data = new FormData(e.target);
+      const bookData = Object.fromEntries(data);
 
-            updateBook({ id: book._id, data: bookData });
-            setBookToEdit(null);
-        } catch (error) {
-            console.log(error);
-        }
-
+      const { data: result } = await updateBook({
+        id: book._id,
+        data: bookData,
+      });
+      if (!result?.success) {
+        toast.error("Book update failed");
+        return;
+      }
+      
+      toast.success("Book update successfully");
+      setBookToEdit(null);
+      // if(data)
+    } catch (error) {
+      console.log(error);
     }
-  
-  
-    return (
+  };
+
+  return (
     <div className="fixed inset-0 bg-black/5 flex justify-center items-center">
-      <form onSubmit={handleSubmitForm} className="bg-white max-w-3xl mx-auto rounded-lg p-8 drop-shadow-lg">
+      <form
+        onSubmit={handleSubmitForm}
+        className="bg-white max-w-3xl mx-auto rounded-lg p-8 drop-shadow-lg"
+      >
         <div className="space-y-4">
           <div>
             <label htmlFor="title">Title: </label>

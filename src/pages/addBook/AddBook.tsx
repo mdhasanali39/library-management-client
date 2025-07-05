@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { useSaveBookMutation } from "../../redux/api/baseApi";
 
 const AddBook = () => {
@@ -6,14 +7,36 @@ const AddBook = () => {
 
     console.log(data, "book added");
 
-    const handleSubmitForm = (e) =>{
+    const handleSubmitForm = async(e) =>{
         try {
             e.preventDefault();
+
+            // if any of the fields are empty, return
+            if (
+              !e.target.title.value ||
+              !e.target.author.value ||
+              !e.target.genre.value ||
+              !e.target.isbn.value ||
+              !e.target.copies.value
+            ) {
+              e.target.focus()
+              toast.error("Please fill all the fields");
+              return;
+            }
+
             const data = new FormData(e.target);
-            const bookData = Object.fromEntries(data);
-            console.log(bookData);
-            
-            saveBook({...bookData, available: true});
+            const bookData = Object.fromEntries(data);            
+            const { data: result } = await saveBook({
+              ...bookData,
+              available: true,
+            });
+
+            if(!result?.success){
+                toast.error("Duplicate ISBN");
+                return
+            }
+            toast.success("Book added successfully");
+            e.target.reset();
         } catch (error) {
             console.log(error);
         }

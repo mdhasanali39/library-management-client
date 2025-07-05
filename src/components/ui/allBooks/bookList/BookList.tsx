@@ -28,6 +28,7 @@ const BookList = ({ books }) => {
             <button
               onClick={() => {
                 toast.dismiss(t.id); // close toast
+                // here is the delete call
                 deleteBook(id);
                 toast.success("Deleted successfully");
               }}
@@ -45,7 +46,7 @@ const BookList = ({ books }) => {
         </div>
       ),
       {
-        duration: 5000, // auto-close if not interacted
+        duration: 15000, // auto-close if not interacted
       }
     );    
   }
