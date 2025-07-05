@@ -1,6 +1,5 @@
 import { Link } from "react-router";
 import { useGetBooksQuery } from "../../../../redux/api/baseApi";
-import type { IBook } from "../../../../constants/types";
 
 
 const HomeBookList = () => {
@@ -12,7 +11,7 @@ const HomeBookList = () => {
       <h2 className="text-3xl font-bold mb-4">Discover Your Friends</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {books?.data &&
-          books?.data?.slice(0, 8).map((book: IBook, index: number) => (
+          books?.data?.slice(0, 8).map((book, index: number) => (
             <div
               key={index}
               className="relative bg-green-100 p-4 min-h-[350px] rounded shadow cursor-pointer "

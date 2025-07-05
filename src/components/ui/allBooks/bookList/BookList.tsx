@@ -4,7 +4,6 @@ import EditBookFormModal from "./editBookFormModal/EditBookFormModal";
 import BorrowBookFormModal from "./borrowBookFormModal/BorrowBookFormModal";
 import { useDeleteBookMutation } from "../../../../redux/api/baseApi";
 import toast from "react-hot-toast";
-import type { IBook } from "../../../../constants/types";
 
 const BookList = ({ books }) => {
   const [bookToEdit, setBookToEdit] = useState(null);
@@ -15,7 +14,7 @@ const BookList = ({ books }) => {
     useDeleteBookMutation(undefined);
 
     // handle edit book 
-  const handleEditBook = (book: IBook) => {
+  const handleEditBook = (book) => {
     setBookToEdit(book);
   };
   
@@ -67,7 +66,7 @@ const BookList = ({ books }) => {
           </tr>
         </thead>
         <tbody>
-          {books?.map((book: IBook) => (
+          {books?.map((book) => (
             <tr key={book._id} className="border-b border-b-green-300">
               <td>{book.title}</td>
               <td className="text-center">{book.author}</td>
