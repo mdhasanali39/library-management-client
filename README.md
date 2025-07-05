@@ -79,12 +79,28 @@ All pages are accessible without login—built for quick access and usability te
 - Strong typing for endpoints and responses
 - Global state managed through Redux slices
 
+## 🚀 Setup Instructions
 
-## 📞 Contact
+1️⃣ **Clone the repo**
 
-For queries or feedback, reach out to the project maintainer:  
-📧 [YourEmail@example.com]  
-🔗 [Your LinkedIn / Portfolio]
+```bash
+git clone https://github.com/mdhasanali39/library-management-client.git
+```
+```bash
+cd library-management-client
+```
+2️⃣ **Install dependencies**
+```bash
+ npm install
+```
+```
+4️⃣ **Run the server**
+```bash
+npm run start
+```
 
----
+
+🧑‍💻 Author <br>
+Md Hasan ali <br>
+[GitHub Profile](https://github.com/mdhasanali39)
 
