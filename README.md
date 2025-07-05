@@ -8,8 +8,8 @@ A lightweight, responsive, and functional **Library Management System** built wi
 
 🔗 **Frontend:** [Live Site URL]  
 🔗 **Backend API:** [Live API URL]  
-🔗 **GitHub (Frontend):** [[Frontend Repo Link](https://github.com/mdhasanali39/library-management-client)]  
-🔗 **GitHub (Backend):** [[Backend Repo Link](https://github.com/mdhasanali39/library-management-server)]  
+🔗 **GitHub (Frontend):** [Frontend Repo Link](https://github.com/mdhasanali39/library-management-client)
+🔗 **GitHub (Backend):** [Backend Repo Link](https://github.com/mdhasanali39/library-management-server) 
 
 ---
 
