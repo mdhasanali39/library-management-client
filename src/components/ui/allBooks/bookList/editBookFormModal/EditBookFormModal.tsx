@@ -13,8 +13,8 @@ const EditBookFormModal = ({ book, setBookToEdit }: EditBookFormModalProps) => {
   const handleSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
-
-      const data = new FormData(e.target);
+      const form = e.target as HTMLFormElement;
+      const data = new FormData(form);
       const bookData = Object.fromEntries(data);
 
       const { data: result } = await updateBook({

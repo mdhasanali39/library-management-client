@@ -10,8 +10,8 @@ const AddBook = () => {
         try {
             e.preventDefault();
 
-
-            const data = new FormData(e.target);
+            const form = e.target as HTMLFormElement;
+            const data = new FormData(form);
             const bookData = Object.fromEntries(data);            
             const { data: result } = await saveBook({
               ...bookData,
@@ -23,7 +23,7 @@ const AddBook = () => {
                 return
             }
             toast.success("Book added successfully");
-            e.target.reset();
+            (form as HTMLFormElement).reset();
         } catch (error) {
             console.log(error);
         }

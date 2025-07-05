@@ -11,8 +11,8 @@ interface BookListProps {
 }
 
 const BookList = ({ books }: BookListProps) => {
-  const [bookToEdit, setBookToEdit] = useState(null);
-  const [bookToBorrow, setBookToBorrow] = useState(null);
+  const [bookToEdit, setBookToEdit] = useState<IBook | null>(null);
+const [bookToBorrow, setBookToBorrow] = useState<IBook | null>(null);
 
   const [deleteBook] = useDeleteBookMutation(undefined);
 
@@ -69,7 +69,7 @@ const BookList = ({ books }: BookListProps) => {
           </tr>
         </thead>
         <tbody>
-          {books?.map((book:IBook) => (
+          {books?.map((book: IBook) => (
             <tr key={book._id} className="border-b border-b-green-300">
               <td>{book.title}</td>
               <td className="text-center">{book.author}</td>
@@ -90,7 +90,7 @@ const BookList = ({ books }: BookListProps) => {
                     </span>
                   </button>
                   <button
-                    onClick={() => hanldeDeleteBook(book?._id)}
+                    onClick={() => book?._id && hanldeDeleteBook(book._id)}
                     className=" cursor-pointer font-medium text-lg text-red-500  rounded mt-4"
                   >
                     <span>

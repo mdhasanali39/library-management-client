@@ -12,13 +12,19 @@ const BorrowBookFormModal = ({
   book,
   setBookToBorrow,
 }: BorrowBookFormModalProps) => {
+  
   const [saveBorrow] = useSaveBorrowMutation(undefined);
 
-  const handleBorrowBook = async (e) => {
+  const handleBorrowBook = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const quantity = e.target.enterCopies.value;
-    const dueDate = e.target.dueDate.value;
+    const target = e.target as typeof e.target & {
+      enterCopies: { value: string };
+      dueDate: { value: string };
+    };
+
+    const quantity = Number(target.enterCopies.value);
+    const dueDate = target.dueDate.value;
 
     if (quantity > book?.copies) {
       toast.error(`Can't exceeds the available copies ${book?.copies}`);

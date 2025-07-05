@@ -2,10 +2,11 @@ import { useParams } from "react-router";
 import { useGetBookQuery } from "../../redux/api/baseApi";
 import BorrowBookFormModal from "../../components/ui/allBooks/bookList/borrowBookFormModal/BorrowBookFormModal";
 import { useState } from "react";
+import type { IBook } from "../../constants/types";
 
 const SingleBookDetails = () => {
   const { id } = useParams();
-  const [bookToBorrow, setBookToBorrow] = useState(null);
+  const [bookToBorrow, setBookToBorrow] = useState<IBook | null>(null);
   const { data: book, } = useGetBookQuery(id as string);
 
 
