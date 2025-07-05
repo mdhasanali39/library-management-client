@@ -6,7 +6,7 @@ import { useState } from "react";
 const SingleBookDetails = () => {
   const { id } = useParams();
   const [bookToBorrow, setBookToBorrow] = useState(null);
-  const { data: book, isLoading, isError } = useGetBookQuery(id as string);
+  const { data: book, } = useGetBookQuery(id as string);
 
 
   return (

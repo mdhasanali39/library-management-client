@@ -3,7 +3,7 @@ import { useUpdateBookMutation } from "../../../../../redux/api/baseApi";
 import toast from "react-hot-toast";
 
 const EditBookFormModal = ({ book, setBookToEdit }) => {
-  const [updateBook, { data, isLoading, isError }] =
+  const [updateBook] =
     useUpdateBookMutation(undefined);
 
   const handleSubmitForm = async (e) => {

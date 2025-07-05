@@ -3,8 +3,6 @@ import { useGetBorrowSummaryQuery } from "../../redux/api/baseApi";
 const BorrowedBooksSummary = () => {
   const {
     data: borrowedSummary,
-    isLoading,
-    isError,
   } = useGetBorrowSummaryQuery(undefined);
 
   console.log(borrowedSummary, "borrowedSummary");

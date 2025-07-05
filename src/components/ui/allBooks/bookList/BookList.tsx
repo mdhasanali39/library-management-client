@@ -10,7 +10,7 @@ const BookList = ({ books }) => {
   const [bookToBorrow, setBookToBorrow] = useState(null);
  
  
-  const [deleteBook, { data, isLoading, error }] =
+  const [deleteBook] =
     useDeleteBookMutation(undefined);
 
     // handle edit book 

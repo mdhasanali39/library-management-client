@@ -3,7 +3,7 @@ import { useGetBooksQuery } from "../../redux/api/baseApi";
 
 const Books = () => {
     
-    const {data: books, isError, isLoading} = useGetBooksQuery(undefined);
+    const {data: books, } = useGetBooksQuery(undefined);
 
     return (
         <div>

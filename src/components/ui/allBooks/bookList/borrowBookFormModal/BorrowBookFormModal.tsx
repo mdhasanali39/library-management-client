@@ -3,7 +3,7 @@ import { useSaveBorrowMutation } from "../../../../../redux/api/baseApi";
 import toast from "react-hot-toast";
 
 const BorrowBookFormModal = ({ book, setBookToBorrow }) => {
-  const [saveBorrow, { data, isLoading, isError }] =
+  const [saveBorrow] =
     useSaveBorrowMutation(undefined);
 
   const handleBorrowBook = async(e) => {

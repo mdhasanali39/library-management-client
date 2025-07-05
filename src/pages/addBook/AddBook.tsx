@@ -3,7 +3,8 @@ import { useSaveBookMutation } from "../../redux/api/baseApi";
 
 const AddBook = () => {
 
-    const [saveBook, {data, isLoading, isError}] = useSaveBookMutation(undefined)
+    const [saveBook] = useSaveBookMutation(undefined)
+
 
     const handleSubmitForm = async(e) =>{
         try {
