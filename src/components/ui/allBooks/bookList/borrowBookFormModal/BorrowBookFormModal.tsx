@@ -1,32 +1,44 @@
 import { FaTimesCircle } from "react-icons/fa";
 import { useSaveBorrowMutation } from "../../../../../redux/api/baseApi";
 import toast from "react-hot-toast";
+import type { IBook } from "../../../../../constants/types";
 
-const BorrowBookFormModal = ({ book, setBookToBorrow }) => {
-  const [saveBorrow] =
-    useSaveBorrowMutation(undefined);
+interface BorrowBookFormModalProps {
+  book: IBook;
+  setBookToBorrow: React.Dispatch<React.SetStateAction<IBook | null>>;
+}
 
-  const handleBorrowBook = async(e) => {
+const BorrowBookFormModal = ({
+  book,
+  setBookToBorrow,
+}: BorrowBookFormModalProps) => {
+  const [saveBorrow] = useSaveBorrowMutation(undefined);
+
+  const handleBorrowBook = async (e) => {
     e.preventDefault();
 
     const quantity = e.target.enterCopies.value;
     const dueDate = e.target.dueDate.value;
 
-    if(quantity > book?.copies){
+    if (quantity > book?.copies) {
       toast.error(`Can't exceeds the available copies ${book?.copies}`);
-      return
+      return;
     }
 
-    if (!quantity || quantity <= 0){
+    if (!quantity || quantity <= 0) {
       toast.error("please enter valid quantity of copies");
-      return
+      return;
     }
     if (!dueDate) {
       toast.error("please select valid due date");
       return;
     }
-    
-   const {data: result} = await saveBorrow({ book: book?._id, quantity, dueDate });
+
+    const { data: result } = await saveBorrow({
+      book: book?._id,
+      quantity,
+      dueDate,
+    });
 
     if (!result?.success) {
       toast.error("Book borrow failed");
@@ -34,7 +46,7 @@ const BorrowBookFormModal = ({ book, setBookToBorrow }) => {
     }
 
     toast.success("Book borrowed successfully");
-    setBookToBorrow(null)
+    setBookToBorrow(null);
   };
 
   return (

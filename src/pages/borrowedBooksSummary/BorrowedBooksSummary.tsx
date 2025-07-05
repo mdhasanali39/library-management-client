@@ -1,11 +1,18 @@
 import { useGetBorrowSummaryQuery } from "../../redux/api/baseApi";
 
+interface borrowedSummary {
+  book: {
+    title: string;
+    isbn: string;
+  };
+  totalQuantity: number;
+}
+
 const BorrowedBooksSummary = () => {
   const {
     data: borrowedSummary,
   } = useGetBorrowSummaryQuery(undefined);
 
-  console.log(borrowedSummary, "borrowedSummary");
 
   return (
     <div className="overflow-x-auto max-w-7xl mx-auto my-16 min-h-[calc(100vh-60px)] px-5">
@@ -18,7 +25,7 @@ const BorrowedBooksSummary = () => {
           </tr>
         </thead>
         <tbody>
-          {borrowedSummary?.data?.map((item, idx) => (
+          {borrowedSummary?.data?.map((item: borrowedSummary, idx:number) => (
             <tr key={idx} className="border-b border-b-green-300 py-3">
               <td>{item?.book?.title}</td>
               <td className="text-center">{item?.book?.isbn}</td>

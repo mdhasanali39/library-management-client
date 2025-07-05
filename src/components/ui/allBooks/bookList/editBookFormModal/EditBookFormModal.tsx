@@ -1,12 +1,16 @@
-import { GiNextButton } from "react-icons/gi";
 import { useUpdateBookMutation } from "../../../../../redux/api/baseApi";
 import toast from "react-hot-toast";
+import type { IBook } from "../../../../../constants/types";
 
-const EditBookFormModal = ({ book, setBookToEdit }) => {
-  const [updateBook] =
-    useUpdateBookMutation(undefined);
+interface EditBookFormModalProps {
+  book: IBook;
+  setBookToEdit: React.Dispatch<React.SetStateAction<IBook | null>>;
+}
 
-  const handleSubmitForm = async (e) => {
+const EditBookFormModal = ({ book, setBookToEdit }: EditBookFormModalProps) => {
+  const [updateBook] = useUpdateBookMutation(undefined);
+
+  const handleSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
 
@@ -21,7 +25,7 @@ const EditBookFormModal = ({ book, setBookToEdit }) => {
         toast.error("Book update failed");
         return;
       }
-      
+
       toast.success("Book update successfully");
       setBookToEdit(null);
       // if(data)

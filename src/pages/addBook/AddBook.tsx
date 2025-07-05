@@ -6,7 +6,7 @@ const AddBook = () => {
     const [saveBook] = useSaveBookMutation(undefined)
 
 
-    const handleSubmitForm = async(e) =>{
+    const handleSubmitForm = async(e: React.FormEvent<HTMLFormElement>) =>{
         try {
             e.preventDefault();
 
