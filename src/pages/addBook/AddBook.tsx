@@ -9,18 +9,6 @@ const AddBook = () => {
         try {
             e.preventDefault();
 
-            // if any of the fields are empty, return
-            if (
-              !e.target.title.value ||
-              !e.target.author.value ||
-              !e.target.genre.value ||
-              !e.target.isbn.value ||
-              !e.target.copies.value
-            ) {
-              e.target.focus()
-              toast.error("Please fill all the fields");
-              return;
-            }
 
             const data = new FormData(e.target);
             const bookData = Object.fromEntries(data);            
@@ -54,6 +42,7 @@ const AddBook = () => {
                 id="title"
                 name="title"
                 placeholder="Title"
+                required
                 className="border-b border-b-black/30 outline-none px-4"
               />
             </div>
@@ -63,6 +52,7 @@ const AddBook = () => {
                 type="text"
                 id="author"
                 name="author"
+                required
                 placeholder="Author"
                 className="border-b border-b-black/30 outline-none px-4"
               />
@@ -73,6 +63,7 @@ const AddBook = () => {
                 type="text"
                 id="genre"
                 name="genre"
+                required
                 placeholder="Genre"
                 className="border-b border-b-black/30 outline-none px-4"
               />
@@ -83,6 +74,7 @@ const AddBook = () => {
                 type="text"
                 id="isbn"
                 name="isbn"
+                required
                 placeholder="ISBN"
                 className="border-b border-b-black/30 outline-none px-4"
               />
@@ -90,11 +82,13 @@ const AddBook = () => {
             <div>
               <label htmlFor="copies">Copies: </label>
               <input
-                type="text"
+                type="number"
                 id="copies"
+                min={0}
                 name="copies"
+                required
                 placeholder="Copies"
-                className="border-b border-b-black/30 outline-none px-4"
+                className="border-b border-b-black/30 outline-none px-4 "
               />
             </div>
             <div>
@@ -102,6 +96,7 @@ const AddBook = () => {
               <textarea
                 id="description"
                 name="description"
+                required
                 placeholder="Description"
                 className="border-b border-b-black/30 outline-none px-4"
               />

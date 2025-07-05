@@ -6,10 +6,11 @@ const BorrowBookFormModal = ({ book, setBookToBorrow }) => {
   const [saveBorrow, { data, isLoading, isError }] =
     useSaveBorrowMutation(undefined);
 
-  const handleBorrowBook = (e) => {
+  const handleBorrowBook = async(e) => {
     e.preventDefault();
 
     const quantity = e.target.enterCopies.value;
+    const dueDate = e.target.dueDate.value;
 
     if(quantity > book?.copies){
       toast.error(`Can't exceeds the available copies ${book?.copies}`);
@@ -20,11 +21,19 @@ const BorrowBookFormModal = ({ book, setBookToBorrow }) => {
       toast.error("please enter valid quantity of copies");
       return
     }
+    if (!dueDate) {
+      toast.error("please select valid due date");
+      return;
+    }
     
-      const date = Date.now();
-    // console.log(date)
+   const {data: result} = await saveBorrow({ book: book?._id, quantity, dueDate });
 
-    saveBorrow({ book: book?._id, quantity, dueDate: date });
+    if (!result?.success) {
+      toast.error("Book borrow failed");
+      return;
+    }
+
+    toast.success("Book borrowed successfully");
     setBookToBorrow(null)
   };
 
@@ -59,6 +68,15 @@ const BorrowBookFormModal = ({ book, setBookToBorrow }) => {
               id="enterCopies"
               name="enterCopies"
               className="border-b border-b-black/30 outline-none pl-3"
+            />
+            <br />
+            <br />
+            <label htmlFor="dueDate">Select dueDate:</label>
+            <input
+              type="date"
+              id="dueDate"
+              name="dueDate"
+              className="border-none outline-none pl-3"
             />
           </div>
 
