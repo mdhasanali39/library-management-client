@@ -9,6 +9,7 @@ export const baseApi = createApi({
   endpoints: (builder) => ({
     getBooks: builder.query({
       query: () => "/books",
+      providesTags: ["books"]
     }),
     getBook: builder.query({
       query: (id: string) => `/books/${id}`,
@@ -46,6 +47,7 @@ export const baseApi = createApi({
     }),
     getBorrowSummary: builder.query({
       query: () => "/borrow",
+      providesTags: ["books"],
     }),
   }),
 });
