@@ -4,22 +4,23 @@ import EditBookFormModal from "./editBookFormModal/EditBookFormModal";
 import BorrowBookFormModal from "./borrowBookFormModal/BorrowBookFormModal";
 import { useDeleteBookMutation } from "../../../../redux/api/baseApi";
 import toast from "react-hot-toast";
+import type { IBook } from "../../../../constants/types";
 
 const BookList = ({ books }) => {
   const [bookToEdit, setBookToEdit] = useState(null);
   const [bookToBorrow, setBookToBorrow] = useState(null);
+ 
+ 
+  const [deleteBook, { data, isLoading, error }] =
+    useDeleteBookMutation(undefined);
 
-
-  const [deleteBook, {data, isLoading, error}] = useDeleteBookMutation(undefined);
-
-  console.log(data, "book deleted");
-
-  const handleEditBook = (book) => {
+    // handle edit book 
+  const handleEditBook = (book: IBook) => {
     setBookToEdit(book);
   };
-
-  const hanldeDeleteBook = (id) =>{
-
+  
+  // halde delete book 
+  const hanldeDeleteBook = (id) => {
     toast(
       (t) => (
         <div className="p-2">
@@ -48,12 +49,12 @@ const BookList = ({ books }) => {
       {
         duration: 15000, // auto-close if not interacted
       }
-    );    
-  }
+    );
+  };
 
   return (
-    <div className="overflow-x-auto max-w-7xl mx-auto my-16 min-h-[calc(100vh-60px)]">
-      <table className="table w-full">
+    <div className="overflow-x-auto max-w-7xl mx-auto my-16 min-h-[calc(100vh-60px)] px-5">
+      <table className="table-auto w-full">
         <thead>
           <tr className="border-b-2 border-b-gray-200">
             <th className="text-left">Title</th>
@@ -66,7 +67,7 @@ const BookList = ({ books }) => {
           </tr>
         </thead>
         <tbody>
-          {books?.map((book) => (
+          {books?.map((book: IBook) => (
             <tr key={book._id} className="border-b border-b-green-300">
               <td>{book.title}</td>
               <td className="text-center">{book.author}</td>
@@ -77,7 +78,7 @@ const BookList = ({ books }) => {
                 {book.available ? "Available" : "Unavailable"}
               </td>
               <td className="text-center">
-                <div className="flex justify-center items-center gap-6">
+                <div className="flex justify-center items-start gap-6 ml-3">
                   <button
                     onClick={() => handleEditBook(book)}
                     className=" cursor-pointer font-medium text-lg text-green-600  rounded mt-4"
@@ -87,7 +88,7 @@ const BookList = ({ books }) => {
                     </span>
                   </button>
                   <button
-                  onClick={()=>hanldeDeleteBook(book?._id)}
+                    onClick={() => hanldeDeleteBook(book?._id)}
                     className=" cursor-pointer font-medium text-lg text-red-500  rounded mt-4"
                   >
                     <span>
@@ -97,7 +98,7 @@ const BookList = ({ books }) => {
                   <button
                     disabled={!book.available}
                     onClick={() => setBookToBorrow(book)}
-                    className=" cursor-pointer font-medium text-lg text-green-500 disabled:cursor-not-allowed rounded mt-4"
+                    className=" cursor-pointer font-medium text-lg text-green-500 disabled:cursor-not-allowed rounded mt-2"
                   >
                     <span>Borrow</span>
                   </button>

@@ -8,7 +8,6 @@ const SingleBookDetails = () => {
   const [bookToBorrow, setBookToBorrow] = useState(null);
   const { data: book, isLoading, isError } = useGetBookQuery(id as string);
 
-  console.log(id, "params");
 
   return (
     <div className="min-h-[calc(100vh-60px)] max-w-7xl mx-auto">
@@ -65,11 +64,11 @@ const SingleBookDetails = () => {
           {/* borrow book button  */}
           <div className="mt-10">
             <button
-              disabled={!book?.available}
-              onClick={() => setBookToBorrow(book)}
-              className=" cursor-pointer font-medium text-lg text-green-500 disabled:cursor-not-allowed rounded mt-4"
+              disabled={!book?.data?.available}
+              onClick={() => setBookToBorrow(book?.data)}
+              className="bg-green-500 cursor-pointer font-medium text-lg disabled:cursor-not-allowed text-white px-4 py-2  rounded"
             >
-              <span>Borrow</span>
+              <span>Borrow Book</span>
             </button>
           </div>
         </div>
@@ -81,11 +80,11 @@ const SingleBookDetails = () => {
         </div>
       </div>
       {bookToBorrow && (
-              <BorrowBookFormModal
-                book={bookToBorrow}
-                setBookToBorrow={setBookToBorrow}
-              />
-            )}
+        <BorrowBookFormModal
+          book={bookToBorrow}
+          setBookToBorrow={setBookToBorrow}
+        />
+      )}
     </div>
   );
 };

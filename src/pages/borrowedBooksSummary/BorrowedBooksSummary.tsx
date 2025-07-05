@@ -10,8 +10,8 @@ const BorrowedBooksSummary = () => {
   console.log(borrowedSummary, "borrowedSummary");
 
   return (
-    <div className="overflow-x-auto max-w-7xl mx-auto my-16 min-h-[calc(100vh-60px)]">
-      <table className="table w-full">
+    <div className="overflow-x-auto max-w-7xl mx-auto my-16 min-h-[calc(100vh-60px)] px-5">
+      <table className="table-auto w-full">
         <thead>
           <tr className="border-b-2 border-b-gray-200">
             <th className="text-left">Book Title</th>

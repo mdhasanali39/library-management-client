@@ -21,15 +21,12 @@ const BorrowBookFormModal = ({ book, setBookToBorrow }) => {
       return
     }
     
-      
       const date = Date.now();
     // console.log(date)
 
     saveBorrow({ book: book?._id, quantity, dueDate: date });
     setBookToBorrow(null)
   };
-
-  console.log(data, "book borrowed");
 
   return (
     <div className="fixed inset-0 bg-black/5 flex justify-center items-center">

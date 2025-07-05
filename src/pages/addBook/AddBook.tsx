@@ -5,8 +5,6 @@ const AddBook = () => {
 
     const [saveBook, {data, isLoading, isError}] = useSaveBookMutation(undefined)
 
-    console.log(data, "book added");
-
     const handleSubmitForm = async(e) =>{
         try {
             e.preventDefault();
